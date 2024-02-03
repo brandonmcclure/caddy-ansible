@@ -17,17 +17,10 @@ StartLimitBurst={{ caddy_systemd_restart_startlimitburst }}
 
 [Service]
 Restart={{ caddy_systemd_restart }}
-{% if caddy_systemd_version | int < 230 %}
-StartLimitInterval={{ caddy_systemd_restart_startlimitinterval }}
-StartLimitBurst={{ caddy_systemd_restart_startlimitburst }}
-{% endif %}
 
 ; User and group the process will run as.
 User={{ caddy_user }}
 Group={{ caddy_user }}
-
-; Letsencrypt-issued certificates will be written to this directory.
-Environment=CADDYPATH={{ caddy_certs_dir }}
 
 ExecStart="{{ caddy_bin_dir }}/caddy" run --environ --config "{{ caddy_conf_dir }}/{{ caddy_conf_filename }}" {{ caddy_additional_args }}
 ExecReload="{{ caddy_bin_dir }}/caddy" reload --config "{{ caddy_conf_dir }}/{{ caddy_conf_filename }}"
