@@ -16,6 +16,7 @@ StartLimitBurst={{ caddy_systemd_restart_startlimitburst }}
 {% endif %}
 
 [Service]
+Type=notify
 Restart={{ caddy_systemd_restart }}
 
 ; User and group the process will run as.
